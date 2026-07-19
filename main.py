@@ -41,7 +41,7 @@ def upload_pdf(file: UploadFile = File(...)):
 def ask_question(question: str):
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     db = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)
-    llm = ChatGroq(model="llama-3.3-70b-versatile", api_key="GROQ_API_KEY")
+    llm = ChatGroq(model="llama-3.3-70b-versatile", api_key=os.geten("GROQ_API_KEY"))
     retriever = db.as_retriever()
     docs = retriever.invoke(question)
     context = "\n\n".join([doc.page_content for doc in docs])
