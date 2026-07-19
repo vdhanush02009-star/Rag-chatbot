@@ -33,7 +33,7 @@ def upload_pdf(file: UploadFile = File(...)):
     pages = loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
     chunks = splitter.split_documents(pages)
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name="paraphrase-MiniLM-L3-v2")
     db = Chroma.from_documents(chunks, embeddings, persist_directory="./chroma_db")
     return {"message": f"{file.filename} processed - {len(chunks)} chunks stored"}
 
